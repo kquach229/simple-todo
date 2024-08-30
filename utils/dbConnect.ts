@@ -1,11 +1,11 @@
 import { Pool, PoolClient, QueryResult } from 'pg';
 
 export const pool = new Pool({
-  user: process.env.USER_NAME as string,
-  host: process.env.HOST_NAME as string,
-  database: process.env.DB_NAME as string,
-  password: process.env.DB_PASSWORD as string,
-  port: parseInt(process.env.PORT_NUMBER as string), // parse port as number
+  user: process.env.USER_NAME || 'default', // Use 'default' as fallback
+  host: process.env.HOST_NAME || 'localhost', // Use 'localhost' as fallback
+  database: process.env.DB_NAME || 'mydatabase', // Use a default db name
+  password: process.env.DB_PASSWORD || '', // Ensure a fallback or error if missing
+  port: parseInt(process.env.PORT_NUMBER as string) || 5432, // Fallback to port 5432
 });
 
 export default async function dbConnect(): Promise<void> {
