@@ -17,19 +17,18 @@ export default async function Home() {
 
   const createTodo = async (formData: FormData) => {
     'use server';
-    let title = formData.get('title')?.toString();
-    let description = formData.get('description')?.toString();
+    let title = formData.get('title')?.valueOf();
+    let description = formData.get('description')?.valueOf();
     try {
       const newNote = await pool.query(
         'INSERT INTO todo (title, description) VALUES ($1, $2) RETURNING *',
         [title, description]
       );
       console.log('new note added: ', newNote);
+      window && window.location.reload();
     } catch (err) {
       console.log('error adding todo: ', err);
     }
-
-    window.location.reload(); // Reloads the page to fetch the latest todos
   };
 
   return (
