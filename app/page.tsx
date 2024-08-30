@@ -1,6 +1,6 @@
 import { pool } from '@/utils/dbConnect';
-import { redirect } from 'next/navigation';
 import TodoCard from './components/TodoCard';
+import { revalidatePath } from 'next/cache'; // Import revalidatePath
 // Define the type for the todo item
 interface Todo {
   id: number;
@@ -25,7 +25,7 @@ export default async function Home() {
         [title, description]
       );
       console.log('new note added: ', newNote);
-      window && window.location.reload();
+      revalidatePath('/');
     } catch (err) {
       console.log('error adding todo: ', err);
     }
