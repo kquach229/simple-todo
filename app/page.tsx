@@ -13,7 +13,7 @@ export default async function Home() {
   const todos = await pool.query<Todo>(
     'SELECT * FROM todo ORDER BY date_added DESC'
   );
-  const results = todos.rows;
+  const results = await todos.rows;
 
   const createTodo = async (formData: FormData) => {
     'use server';
