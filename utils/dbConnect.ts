@@ -15,9 +15,9 @@ export default async function dbConnect(): Promise<void> {
     const result: QueryResult<{ now: string }> = await client.query(
       'SELECT NOW()'
     );
-    console.log('connected to the db:', result.rows[0].now);
+    console.log('Connected to the DB:', result.rows[0].now);
   } catch (err: any) {
-    console.error('error connecting to database: ', err.stack);
+    console.error('Error connecting to database:', err.stack);
   } finally {
     if (client) {
       client.release();
