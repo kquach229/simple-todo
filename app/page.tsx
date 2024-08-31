@@ -10,6 +10,7 @@ interface Todo {
   date_added: string;
 }
 export default async function Home() {
+  //
   const todos = await pool.query<Todo>(
     'SELECT * FROM todo ORDER BY date_added DESC'
   );
